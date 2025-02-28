@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    //roman numeral values
+    int I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000;
+
+    //input numeral 
+    string num;
+    cout << "Enter your Roman numeral: ";
+    cin >> num;
+
+    //check length validity according to given constraints
+    if (num.length() < 1 || num.length() > 15) {
+        cout << "Invalid input length" << endl;
+        return 0; //Exit the program
+    }
+
+    // Validate characters and convert to number
+    int total = 0; 
+    int prev_value = 0; //previous numeral's value
+
+    for (int i = num.length() - 1; i >= 0; i--) { // Loop from the right side
+        int current_value = 0; // Value of the current Roman numeral
+
+        // Map Roman numeral characters to their values
+        if (num[i] == 'I') {
+            current_value = I;
+        }
+        else if (num[i] == 'V') {
+            current_value = V;
+        }
+        else if (num[i] == 'X') {
+            current_value = X;
+        }
+        else if (num[i] == 'L') {
+            current_value = L;
+        }
+        else if (num[i] == 'C') {
+            current_value = C;
+        }
+        else if (num[i] == 'D') {
+            current_value = D;
+        }
+        else if (num[i] == 'M') {
+            current_value = M;
+        }
+        else {
+            // Invalid character found
+            cout << "Invalid characters" << endl;
+            return 0; // Exit the program
+        }
+
+        // If the current value is smaller than the previous value, we subtract it
+        if (current_value < prev_value) {
+            total -= current_value;
+        }
+        else {
+            total += current_value; // Otherwise, we add it
+        }
+
+        // Update the previous value for the next loop
+        prev_value = current_value;
+    }
+
+    // Check if the result is within the valid range
+    if (total < 1 || total > 3999) {
+        cout << "Number out of range (1-3999)" << endl;
+    }
+    else {
+        cout << "The number is: " << total << endl;
+    }
+
+    return 0;
+}
